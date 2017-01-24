@@ -111,9 +111,10 @@ var JsonApiDataStore = (function () {
    * @method constructor
    */
 
-  function JsonApiDataStore() {
+  function JsonApiDataStore(model) {
     _classCallCheck(this, JsonApiDataStore);
 
+    this.model = model || JsonApiDataStoreModel;
     this.graph = {};
   }
 
@@ -173,7 +174,7 @@ var JsonApiDataStore = (function () {
     key: "initModel",
     value: function initModel(type, id) {
       this.graph[type] = this.graph[type] || {};
-      this.graph[type][id] = this.graph[type][id] || new JsonApiDataStoreModel(type, id);
+      this.graph[type][id] = this.graph[type][id] || new this.model(type, id);
 
       return this.graph[type][id];
     }

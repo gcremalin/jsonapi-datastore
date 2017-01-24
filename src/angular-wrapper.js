@@ -3,7 +3,7 @@
     .module('beauby.jsonApiDataStore', [])
     .factory('JsonApiDataStore', function() {
       return {
-        store: new JsonApiDataStore(),
+        store: JsonApiDataStore,
         Model: JsonApiDataStoreModel
       };
     });

@@ -3,7 +3,7 @@
     .module('beauby.jsonApiDataStore', [])
     .factory('JsonApiDataStore', function() {
       return {
-        store: new JsonApiDataStore(),
+        store: JsonApiDataStore,
         Model: JsonApiDataStoreModel
       };
     });
@@ -148,9 +148,10 @@
      * @method constructor
      */
 
-    function JsonApiDataStore() {
+    function JsonApiDataStore(model) {
       _classCallCheck(this, JsonApiDataStore);
 
+      this.model = model || JsonApiDataStoreModel;
       this.graph = {};
     }
 
@@ -210,7 +211,7 @@
       key: "initModel",
       value: function initModel(type, id) {
         this.graph[type] = this.graph[type] || {};
-        this.graph[type][id] = this.graph[type][id] || new JsonApiDataStoreModel(type, id);
+        this.graph[type][id] = this.graph[type][id] || new this.model(type, id);
 
         return this.graph[type][id];
       }

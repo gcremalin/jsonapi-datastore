@@ -90,7 +90,8 @@ class JsonApiDataStore {
   /**
    * @method constructor
    */
-  constructor() {
+  constructor(model) {
+    this.model = model || JsonApiDataStoreModel;
     this.graph = {};
   }
 
@@ -138,7 +139,7 @@ class JsonApiDataStore {
 
   initModel(type, id) {
     this.graph[type] = this.graph[type] || {};
-    this.graph[type][id] = this.graph[type][id] || new JsonApiDataStoreModel(type, id);
+    this.graph[type][id] = this.graph[type][id] || new this.model(type, id);
 
     return this.graph[type][id];
   }
